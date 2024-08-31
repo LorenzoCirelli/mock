@@ -11,8 +11,12 @@ const server = http.createServer((req, res) => {
   // Parse the request url
   const reqUrl = url.parse(req.url).pathname;
   engine();
-  dbRes(reqUrl).then((val)=>res.end(engine()));
+  dbRes(reqUrl).then((val) => {
+    const rep = engine(val);
+    res.setHeader("Content-Type", "text");
+    res.writeHead(rep.status);
+    res.end(JSON.stringify(rep.msg));
+  });
 });
 // Have the server listen on port 9000
 server.listen(9000);
-
