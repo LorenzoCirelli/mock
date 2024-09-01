@@ -15,7 +15,7 @@ const server = http.createServer((req, res) => {
     const rep = engine(val);
     res.setHeader("Content-Type", "text");
     res.writeHead(rep.status);
-    res.end(JSON.stringify(rep.msg));
+    res.end(rep.msg);
   });
 });
 // Have the server listen on port 9000
