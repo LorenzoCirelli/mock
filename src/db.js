@@ -6,12 +6,12 @@ export function dbRes(route) {
     host: process.env.DB_HOST,
     user: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
-    database: "js",
+    database: process.env.DB,
   });
 
   con.connect(function (err) {
     if (err) throw err;
-    const query = `SELECT * FROM test WHERE route = '${route}' ORDER BY id DESC LIMIT 0,1`
+    const query = `SELECT * FROM mocks WHERE route = '${route}' ORDER BY id DESC LIMIT 0,1`
     con.query(query, function (err, result, fields) {
       if (err) throw err;
         res(result)
